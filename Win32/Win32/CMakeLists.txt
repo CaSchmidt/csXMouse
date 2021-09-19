@@ -4,7 +4,9 @@ cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
 
 project(Win32)
 
-### Win32 ####################################################################
+option(BUILD_EXAMPLES "Build examples" OFF)
+
+### Project Win32 ############################################################
 
 list(APPEND Win32_HEADERS
   include/Win32/CheckBox.h
@@ -44,14 +46,16 @@ target_link_libraries(Win32)
 
 ### Examples #################################################################
 
-add_executable(example_DialogBase
-  examples/example_DialogBase.cpp
-  resource/DialogBase.rc
-  )
+if(BUILD_EXAMPLES)
+  add_executable(example_DialogBase
+    examples/example_DialogBase.cpp
+    resource/DialogBase.rc
+    )
 
-set_target_properties(example_DialogBase
-  PROPERTIES
-  WIN32_EXECUTABLE ON
-  )
+  set_target_properties(example_DialogBase
+    PROPERTIES
+    WIN32_EXECUTABLE ON
+    )
 
-target_link_libraries(example_DialogBase Win32)
+  target_link_libraries(example_DialogBase Win32)
+endif()
